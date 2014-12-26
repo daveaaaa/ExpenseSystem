@@ -18,11 +18,9 @@
         <div class="row">
             <%
                 String view = (String) request.getAttribute("view");
-                if ((session == null) || (session.isNew()) || (view == null)) {
-                    view = "login.jsp";
-                    session.invalidate();
+                if ((session == null) || (view == null)) {
+                    response.sendRedirect("index.html");
                 }
-                view = "/WEB-INF/jsp/" + view;
             %>    
             <jsp:include page="<%= view%>"></jsp:include>
         </div>

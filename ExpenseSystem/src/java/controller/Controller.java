@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Controller extends HttpServlet {
 
-    private static final String mainPage = "index.jsp";
+    private static final String mainPage = "WEB-INF/jsp/master.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +34,23 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getRequestURI().substring(request.getContextPath().length()).toLowerCase();
-        action = action.replaceFirst("/", ""); 
+        action = action.replaceFirst("/", "");
+        action = action.toLowerCase();
         switch (action) {
             case "login":
                 request = UserActions.login(request, response);
                 break;
             case "logout":
                 request = UserActions.logout(request, response);
-                break; 
+                break;
+            case "uploadreceipt":
+                request.setAttribute("view", "uploadReceipt.jsp");
+                break;
+            case "homepage":
+                request.setAttribute("view", "homepage.jsp");
+                break;
             default:
+                request.getSession().invalidate();
                 break;
         }
 
