@@ -5,7 +5,7 @@
  */
 package controller;
 
-import business.LoginUser;
+import business.UserActions;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -37,8 +37,11 @@ public class Controller extends HttpServlet {
         action = action.replaceFirst("/", ""); 
         switch (action) {
             case "login":
-                request = LoginUser.doAction(request, response);
+                request = UserActions.login(request, response);
                 break;
+            case "logout":
+                request = UserActions.logout(request, response);
+                break; 
             default:
                 break;
         }

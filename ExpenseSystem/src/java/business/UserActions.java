@@ -12,9 +12,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author david
  */
-public class LoginUser {
-    public static HttpServletRequest doAction(HttpServletRequest request, HttpServletResponse response){
+public class UserActions {
+    public static HttpServletRequest login(HttpServletRequest request, HttpServletResponse response){
         request.setAttribute("view", "homepage.jsp");
+        return request; 
+    }
+    public static HttpServletRequest logout(HttpServletRequest request, HttpServletResponse response){
+        request.setAttribute("view", "login.jsp");
+        request.getSession().invalidate();
         return request; 
     }
 }
