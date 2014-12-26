@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginUser {
     public static HttpServletRequest doAction(HttpServletRequest request, HttpServletResponse response){
+        request.setAttribute("view", "homepage.jsp");
         return request; 
     }
 }

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import business.LoginUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Controller extends HttpServlet {
 
+    private static final String mainPage = "index.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,6 +32,18 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String action = request.getRequestURI().substring(request.getContextPath().length()).toLowerCase();
+        action = action.replaceFirst("/", ""); 
+        switch (action) {
+            case "login":
+                request = LoginUser.doAction(request, response);
+                break;
+            default:
+                break;
+        }
+
+        request.getRequestDispatcher(mainPage).forward(request, response);
 
     }
 
